@@ -1,0 +1,80 @@
+/* Общие стили */
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  color: #ddd;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+/* Затемнение поверх фона */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+
+/* Заголовок */
+header {
+  text-align: center;
+  padding: 80px 20px 20px;
+}
+
+header h1 {
+  font-size: 64px;
+  margin: 0;
+  letter-spacing: 8px;
+  color: #e60000;
+}
+
+.subtitle {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Навигация */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #e60000;
+}
+
+/* Основной текст */
+main {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+/* Подвал */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #555;
+}
