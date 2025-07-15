@@ -5,32 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>О Мархосиасе</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
+  <canvas id="background-canvas"></canvas>
 
   <div class="overlay"></div>
 
   <header>
-    <h1>MARCHOSIAS/h1>
+    <h1>MARCHOSIAS</h1>
     <p class="subtitle">"Глас воющего пламени. Клинок мятежного легиона"</p>
     <nav>
-  <ul>
-    <li><a href="index.html">Главная</a></li>
-    <li><a href="about.html">О Нём</a></li>
-    <li><a href="#">Взаимодействие</a></li>
-    <li><a href="#">Алтарь</a></li>
-    <li><a href="#">Контракт</a></li>
-    <li><a href="#">Галерея</a></li>
-  </ul>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О Нём</a></li>
+        <li><a href="#">Взаимодействие</a></li>
+        <li><a href="#">Алтарь</a></li>
+        <li><a href="#">Контракт</a></li>
+        <li><a href="#">Галерея</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <h2>О Нём</h2>
+    <section>
+      <h2>О Нём</h2>
       <p>
-        Мархосиас — один из 72-х демонов "Гоэтии", первой книги "Малого Ключа Соломона". Имеет чин Маркиза. Предстаёт в образе огненного волка с грифоньими крыльями и стальным взглядом хищника, но также может являться в обличии оборотня.
-        Является покровителем тех, кто ищет власть через трансформацию, борьбу и внутренний огонь.
-        <br><br>
-        В древних текстах он предстаёт как преданный, честный и чрезвычайно воинственный дух, не склонный к хитрости, но способный к абсолютной преданности.
+        Мархосиас — один из 72 духов Гоэтии, демон четвёртого легиона. Он являет себя в образе огненного волка с грифоньими крыльями, но может принимать и облик воина или зверя. Его натура — противоречие: брутальность и благородство, хаос и дисциплина, уничтожение и защита.
+      </p>
+      <p>
+        Его сила раскрывается в стремлении к внутренней трансформации, разрушении иллюзий, пробуждении зверя в человеке. Он покровитель воинов духа, отверженных, тех, кто идёт по краю между светом и бездной.
+      </p>
+      <p>
+        Его флюид пробуждает чувство огненной решимости, жажду свободы и силу говорить истину сквозь пламя.
       </p>
     </section>
   </main>
@@ -39,6 +53,57 @@
     <p>&copy; 2025 Marchosias Temple</p>
   </footer>
 
+  <script>
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const sparks = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: -Math.random() * 2 - 0.5,
+      size: Math.random() * 2 + 1,
+      alpha: 1.0
+    }));
+
+    function drawSparks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let spark of sparks) {
+        ctx.beginPath();
+        ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, ${Math.floor(Math.random()*150 + 100)}, 0, ${spark.alpha})`;
+        ctx.fill();
+
+        spark.x += spark.vx;
+        spark.y += spark.vy;
+        spark.alpha -= 0.008;
+
+        if (spark.alpha <= 0 || spark.y < 0 || spark.x < 0 || spark.x > canvas.width) {
+          spark.x = Math.random() * canvas.width;
+          spark.y = canvas.height;
+          spark.vx = (Math.random() - 0.5) * 1.5;
+          spark.vy = -Math.random() * 2 - 0.5;
+          spark.size = Math.random() * 2 + 1;
+          spark.alpha = 1.0;
+        }
+      }
+    }
+
+    function animate() {
+      drawSparks();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html> 
 
