@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marchosias Temple</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
+  <canvas id="background-canvas"></canvas>
+
+  <div class="overlay"></div>
 
   <header>
     <h1>MARCHOSIAS</h1>
@@ -25,7 +36,9 @@
 
   <main>
     <section>
-      <p>Добро пожаловать в святилище Мархосиаса — демона войны, духа охоты. Здесь ты найдёшь путь к синхронизации с Его флюидом, заключения контракта и основы взаимодействия.</p>
+      <p>
+        Добро пожаловать в святилище Мархосиаса — демона войны, духа охоты. Здесь ты найдёшь путь к синхронизации с Его флюидом, заключению контракта и основы взаимодействия.
+      </p>
     </section>
   </main>
 
@@ -33,5 +46,56 @@
     <p>&copy; 2025 Marchosias Temple</p>
   </footer>
 
+  <script>
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const sparks = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: -Math.random() * 2 - 0.5,
+      size: Math.random() * 2 + 1,
+      alpha: 1.0
+    }));
+
+    function drawSparks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let spark of sparks) {
+        ctx.beginPath();
+        ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, ${Math.floor(Math.random()*150 + 100)}, 0, ${spark.alpha})`;
+        ctx.fill();
+
+        spark.x += spark.vx;
+        spark.y += spark.vy;
+        spark.alpha -= 0.008;
+
+        if (spark.alpha <= 0 || spark.y < 0 || spark.x < 0 || spark.x > canvas.width) {
+          spark.x = Math.random() * canvas.width;
+          spark.y = canvas.height;
+          spark.vx = (Math.random() - 0.5) * 1.5;
+          spark.vy = -Math.random() * 2 - 0.5;
+          spark.size = Math.random() * 2 + 1;
+          spark.alpha = 1.0;
+        }
+      }
+    }
+
+    function animate() {
+      drawSparks();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
