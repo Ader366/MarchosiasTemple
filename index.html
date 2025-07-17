@@ -6,15 +6,13 @@
   <title>Marchosias Temple</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
       background-color: #2b2b2b;
       color: #ddd;
       text-align: center;
-      height: 100%;
-      overflow-y: auto;
     }
 
     canvas {
@@ -87,6 +85,8 @@
 <body>
   <canvas id="background-canvas"></canvas>
 
+  <div class="overlay"></div>
+
   <div class="header-wrapper">
     <h1>MARCHOSIAS</h1>
     <p class="subtitle">"Глас воющего пламени. Клинок мятежного легиона"</p>
@@ -96,7 +96,7 @@
     <ul>
       <li><a href="index.html">Главная</a></li>
       <li><a href="about.html">О Нём</a></li>
-      <li><a href="interaction.html">Взаимодействие</a></li>
+      <li><a href="#">Взаимодействие</a></li>
       <li><a href="#">Алтарь</a></li>
       <li><a href="#">Контракт</a></li>
       <li><a href="#">Галерея</a></li>
@@ -105,8 +105,14 @@
 
   <main>
     <section>
-      <h2>Добро пожаловать</h2>
-      <p>Добро пожаловать в святилище Мархосиаса — демона войны, духа охоты. Здесь ты найдёшь путь к синхронизации с Его флюидом, заключению контракта и основы взаимодействия.</p>
+      <p>
+        Мархосиас – один из 72-х Демонов "Гоэтии", первой книги "Малого Ключа Соломона". Имеет ранг Маркиза. Предстаёт в образе огненного волка с грифоньими крыльями и стальным взглядом хищника, но также может являться в обличии оборотня.
+       <p>
+        Является мужским архетипом воина-одиночки с собственной философией и самурайской этикой, а также покровителем тех, кто ищет власть через трансформацию, борьбу и внутренний огонь.
+        <p>
+        В древних текстах он предстаёт как преданный, честный и чрезвычайно воинственный дух, не склонный к хитрости, но способный к абсолютной преданности. 
+       </p> 
+      </p>
     </section>
   </main>
 
@@ -120,7 +126,7 @@
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+      canvas.height = window.innerHeight;
     }
 
     window.addEventListener('resize', resizeCanvas);
