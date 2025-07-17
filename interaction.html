@@ -6,13 +6,15 @@
   <title>Marchosias Temple</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
       background-color: #2b2b2b;
       color: #ddd;
       text-align: center;
+      height: 100%;
+      overflow-y: auto;
     }
 
     canvas {
@@ -85,8 +87,6 @@
 <body>
   <canvas id="background-canvas"></canvas>
 
-  <div class="overlay"></div>
-
   <div class="header-wrapper">
     <h1>MARCHOSIAS</h1>
     <p class="subtitle">"Глас воющего пламени. Клинок мятежного легиона"</p>
@@ -96,20 +96,17 @@
     <ul>
       <li><a href="index.html">Главная</a></li>
       <li><a href="about.html">О Нём</a></li>
-      <li><a href="#">Взаимодействие</a></li>
-      <li><a href="#">Алтарь</a></li>
-      <li><a href="#">Контракт</a></li>
-      <li><a href="#">Галерея</a></li>
+      <li><a href="interaction.html">Взаимодействие</a></li>
+      <li><a href="altar.html">Алтарь</a></li>
+      <li><a href="contract.html">Контракт</a></li>
+      <li><a href="gallery.html">Галерея</a></li>
     </ul>
   </nav>
 
   <main>
     <section>
-      <p>
-        Прежде чем начать взаимодействие с Мархосиасом, стоит убедиться в том, а подходит ли оно Вам, поскольку основные планетарные аспекты Мархосиаса это Марс и Луна.
-      <p>
-        Соответственно, человеку желательно иметь достаточно развитые аспекты Марса и Луны, иначе пропускная способность флюида будет хромать.
-       </p> 
+      <p,
+      Прежде чем начать взаимодействие с Мархосиасом, стоит убедиться в том, а подходит ли оно Вам, поскольку основные планетарные аспекты Мархосиаса это Марс и Луна.
       </p>
     </section>
   </main>
@@ -124,7 +121,7 @@
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
     }
 
     window.addEventListener('resize', resizeCanvas);
