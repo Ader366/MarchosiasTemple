@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marchosias Temple</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', serif;
       background-color: #2b2b2b;
       color: #ddd;
       text-align: center;
-      height: 100%;
-      overflow-y: auto;
     }
 
     canvas {
@@ -87,6 +85,8 @@
 <body>
   <canvas id="background-canvas"></canvas>
 
+  <div class="overlay"></div>
+
   <div class="header-wrapper">
     <h1>MARCHOSIAS</h1>
     <p class="subtitle">"Глас воющего пламени. Клинок мятежного легиона"</p>
@@ -97,12 +97,78 @@
       <li><a href="index.html">Главная</a></li>
       <li><a href="about.html">О Нём</a></li>
       <li><a href="interaction.html">Взаимодействие</a></li>
-      <li><a href="altar.html">Алтарь</a></li>
-      <li><a href="contract.html">Контракт</a></li>
-      <li><a href="gallery.html">Галерея</a></li>
+      <li><a href="#">Алтарь</a></li>
+      <li><a href="#">Контракт</a></li>
+      <li><a href="#">Галерея</a></li>
     </ul>
   </nav>
 
+  <main>
+    <section>
+      <p>
+        Добро пожаловать в святилище Мархосиаса – демона стратегической войны и охоты. Здесь ты найдёшь путь к синхронизации с Его флюидом, основам взаимодействия и заключению контракта с Ним.
+       </p> 
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Marchosias Temple</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const sparks = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: -Math.random() * 2 - 0.5,
+      size: Math.random() * 2 + 1,
+      alpha: 1.0
+    }));
+
+    function drawSparks() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let spark of sparks) {
+        ctx.beginPath();
+        ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, ${Math.floor(Math.random()*150 + 100)}, 0, ${spark.alpha})`;
+        ctx.fill();
+
+        spark.x += spark.vx;
+        spark.y += spark.vy;
+        spark.alpha -= 0.008;
+
+        if (spark.alpha <= 0 || spark.y < 0 || spark.x < 0 || spark.x > canvas.width) {
+          spark.x = Math.random() * canvas.width;
+          spark.y = canvas.height;
+          spark.vx = (Math.random() - 0.5) * 1.5;
+          spark.vy = -Math.random() * 2 - 0.5;
+          spark.size = Math.random() * 2 + 1;
+          spark.alpha = 1.0;
+        }
+      }
+    }
+
+    function animate() {
+      drawSparks();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
   <main>
     <section>
       <p>Прежде чем начать взаимодействие с Мархосиасом, стоит убедиться в том, а подходит ли оно Вам, поскольку основные планетарные аспекты Мархосиаса — это Марс и Луна.</p>
