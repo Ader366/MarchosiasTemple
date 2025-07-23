@@ -120,7 +120,7 @@
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+      canvas.height = window.innerHeight;
     }
 
     window.addEventListener('resize', resizeCanvas);
